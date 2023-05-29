@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Character from "./Character";
-import Search from "./Search";
+import Controls from "./Controls";
 
 class Simpsons extends Component {
   render() {
@@ -9,7 +9,7 @@ class Simpsons extends Component {
     return (
       <> 
       
-        <Search onSearchInput={onSearchInput}/>
+        <Controls onSearchInput={onSearchInput}/>
 
         {simpsons.map((item, index) => {
           return (
