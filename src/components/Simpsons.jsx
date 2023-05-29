@@ -4,12 +4,12 @@ import Controls from "./Controls";
 
 class Simpsons extends Component {
   render() {
-    const { simpsons, onDelete, onLikeToggle, onSearchInput } = this.props;
+    const { simpsons, onDelete, onLikeToggle, onSearchInput, onNameOrderInput } = this.props;
 
     return (
       <> 
       
-        <Controls onSearchInput={onSearchInput}/>
+        <Controls onSearchInput={onSearchInput} onNameOrderInput={onNameOrderInput}/>
 
         {simpsons.map((item, index) => {
           return (

@@ -55,6 +55,51 @@ class App extends Component {
   }
 
 
+  onNameOrderInput = (e) => {
+    this.setState({NameOrderInput: e.target.value})
+  }
+
+
+
+  getFilteredSimpsons = () => {
+
+
+    const { simpsons, searchInput, NameOrderInput } = this.state;
+
+    let filteredSimpsons = [...simpsons]
+
+    //filter by the SearchInput box
+    if (searchInput) {
+
+      filteredSimpsons = filteredSimpsons.filter((item)=>{
+        
+        if (item.character.toLowerCase().includes(searchInput.toLowerCase()))
+        {return true;}
+
+      })
+    }
+
+    //Sort by Name order
+    
+    if (NameOrderInput === "A to Z") {
+      filteredSimpsons.sort((a, b) => {
+        if (a.character > b.character) return 1;
+        if (a.character < b.character) return -1;
+      }
+      )
+    } else if (NameOrderInput === "Z to A") {
+      filteredSimpsons.sort((a, b) => {
+        if (a.character > b.character) return -1;
+        if (a.character < b.character) return 1;
+      }
+      )
+    }
+
+    return filteredSimpsons;
+
+  }
+
+
 
   render() {
 
@@ -74,29 +119,15 @@ class App extends Component {
     });
 
 
-    //calculate the data we want to show
-
-    let filteredSimpsons = [...simpsons]
-
-    if (searchInput) {
-
-      filteredSimpsons = filteredSimpsons.filter((item)=>{
-        
-        if (item.character.toLowerCase().includes(searchInput.toLowerCase()))
-        {return true;}
-
-      })
-    }
-
-
     return (
       <>
         <h1>Total no of liked chars #{total}</h1>
         <Simpsons
-          simpsons={filteredSimpsons}
+          simpsons={this.getFilteredSimpsons()}
           onDelete={this.onDelete}
           onLikeToggle={this.onLikeToggle}
           onSearchInput={this.onSearchInput}
+          onNameOrderInput={this.onNameOrderInput}
         />
       </>
     );
